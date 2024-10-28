@@ -35,7 +35,7 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:textSize="40sp"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
     </LinearLayout>
 
     <Spinner
@@ -47,7 +47,9 @@
         android:minHeight="48dp"
         android:padding="12dp"
         android:spinnerMode="dropdown"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:focusable="true"
+        android:clickable="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,38 +65,43 @@
             android:minWidth="40dp"
             android:text="$"
             android:textColor="#FFFFFF"
-            android:textSize="36sp" />
+            android:textSize="40sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/targetAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
             android:padding="8dp"
-            android:text="0.00"
             android:textAlignment="viewStart"
             android:textColor="#FFFFFF"
-            android:textSize="36sp" />
+            android:textColorHint="#FFFFFF"
+            android:textSize="40sp"
+            android:textStyle="normal" />
     </LinearLayout>
 
     <Spinner
         android:id="@+id/targetCurrency"
-        android:layout_width="187dp"
+        android:layout_width="188dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="#FFFFFF"
         android:minHeight="48dp"
         android:padding="12dp"
         android:spinnerMode="dropdown"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:focusable="true"
+        android:clickable="true" />
 
     <TextView
         android:id="@+id/exchangeRateInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="1 VND = 0.00003938 USD\nUpdated 10/28/2024 11:16 AM"
-        android:textColor="#BBBBBB"
+        android:textColor="#FFFFFF"
         android:textSize="14sp" />
 </LinearLayout>
