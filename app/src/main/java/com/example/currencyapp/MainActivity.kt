@@ -20,7 +20,6 @@ class MainActivity : ComponentActivity() {
     private lateinit var targetSymbol: TextView
     private lateinit var exchangeRateInfo: TextView
 
-    // Exchange rates and symbols data
     private val exchangeRates = mapOf(
         "USD" to 1.0,
         "EUR" to 0.9272,
@@ -38,7 +37,6 @@ class MainActivity : ComponentActivity() {
 
     private var isSourceFocused = true
 
-    // Hold references to TextWatchers
     private lateinit var sourceAmountWatcher: TextWatcher
     private lateinit var targetAmountWatcher: TextWatcher
 
@@ -46,7 +44,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize views
         sourceAmount = findViewById(R.id.sourceAmount)
         targetAmount = findViewById(R.id.targetAmount)
         sourceCurrency = findViewById(R.id.sourceCurrency)
@@ -55,26 +52,17 @@ class MainActivity : ComponentActivity() {
         targetSymbol = findViewById(R.id.targetSymbol)
         exchangeRateInfo = findViewById(R.id.exchangeRateInfo)
 
-        // Set up adapters for the spinners
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, exchangeRates.keys.toList())
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         sourceCurrency.adapter = adapter
         targetCurrency.adapter = adapter
 
-        // Set default currencies
         sourceCurrency.setSelection(adapter.getPosition("VND"))
         targetCurrency.setSelection(adapter.getPosition("USD"))
 
-        // Setup watchers for amount fields
         setupTextWatchers()
-
-        // Focus listeners to handle input from source or target fields
         setupFocusListeners()
-
-        // Currency selection listeners to update symbols and exchange rate
         setupCurrencySelectionListeners(adapter)
-
-        // Initial setup
         updateSymbols()
         convertCurrency()
     }
@@ -155,17 +143,13 @@ class MainActivity : ComponentActivity() {
 
     @SuppressLint("SetTextI18n", "DefaultLocale")
     private fun convertCurrency() {
-        // Use var to allow reassignment
         var sourceText = if (isSourceFocused) sourceAmount.text.toString() else targetAmount.text.toString()
 
-        // If the source text is empty, set it to "0"
         if (sourceText.isEmpty()) sourceText = "0"
 
-        // Convert the source text to a double or return if it fails
         val sourceValue = sourceText.toDoubleOrNull() ?: return
         val targetValue = sourceValue * getExchangeRate()
 
-        // Update the respective field based on focus
         if (isSourceFocused) {
             targetAmount.setText(String.format("%.2f", targetValue))
         } else {
